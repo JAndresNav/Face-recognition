@@ -35,7 +35,7 @@ v2
 - If someone is recognized, saves full photo in `caras_detectadas/Name/`
 
 ```bash
-Agrupar_por_carpeta.py
+  Agrupar_por_carpeta.py
 ```
 ---
 
@@ -46,7 +46,7 @@ Agrupar_por_carpeta.py
 - Deletes all images in `caras_detectadas/`, but keeps the name folders
 
 ```bash
-Borrar\ caras\ detectadas.py
+  Borrar\ caras\ detectadas.py
 ```
 
 
@@ -60,7 +60,7 @@ Borrar\ caras\ detectadas.py
 - Draws numbered boxes for each detected face and saves in `miniaturas_marcadas/`
 
 ```bash
-Agrupar_por_cara.py
+  Agrupar_por_cara.py
 ```
 ---
 
@@ -71,12 +71,12 @@ Agrupar_por_cara.py
 - Deletes all folders and photos inside `personas_agrupadas/` and `miniaturas_marcadas/`
 
 ```bash
-Limpiar_personas_agrupadas.py
+  Limpiar_personas_agrupadas.py
 ```
 
 ---
 
-## 🎛Adjustable Parameters
+## Adjustable Parameters
 
 ### Face recognition tolerance
 Inside `Agrupar_por_cara.py` and `Agrupar_por_carpeta.py`:
@@ -103,7 +103,7 @@ TOLERANCE = 0.6
 3. Run:
 
 ```bash
-   python Agrupar_por_carpeta.py
+   Agrupar_por_carpeta.py
 ```
 
 4. Results saved in `caras_detectadas/Name/`
@@ -116,7 +116,7 @@ TOLERANCE = 0.6
 2. Run:
 
 ```bash
-python Agrupar_por_cara.py
+   Agrupar_por_cara.py
 ```
 
 3. Check results inside `personas_agrupadas/` and thumbnails in `miniaturas_marcadas/`
