@@ -5,7 +5,7 @@ import os
 
 
 # Rango de 0.3 - 0.8 recomendado
-TOLERANCIA_RECONOCIMIENTO = 0.6
+TOLERANCIA_RECONOCIMIENTO = 0.55
 
 ENCODINGS_FILE = 'known_faces.pkl'
 TEST_FOLDER = 'Test'

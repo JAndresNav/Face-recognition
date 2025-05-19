@@ -4,7 +4,7 @@ import cv2
 import pickle
 import json
 
-TOLERANCIA_RECONOCIMIENTO = 0.65
+TOLERANCIA_RECONOCIMIENTO = 0.55
 
 FOTOS_DIR = 'Fotos'
 OUTPUT_DIR = 'personas_agrupadas'

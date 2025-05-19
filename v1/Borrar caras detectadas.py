@@ -1,4 +1,5 @@
 import os
+import shutil
 
 CARAS_DIR = 'caras_detectadas'
 
@@ -8,12 +9,10 @@ for persona in os.listdir(CARAS_DIR):
     if not os.path.isdir(persona_dir):
         continue
 
-    for archivo in os.listdir(persona_dir):
-        archivo_path = os.path.join(persona_dir, archivo)
-        try:
-            os.remove(archivo_path)
-            print(f"🗑 Borrado: {archivo_path}")
-        except Exception as e:
-            print(f"⚠ No se pudo borrar {archivo_path}: {e}")
+    try:
+        shutil.rmtree(persona_dir)
+        print(f"🗑 Carpeta eliminada: {persona_dir}")
+    except Exception as e:
+        print(f"⚠ No se pudo eliminar la carpeta {persona_dir}: {e}")
 
-print("\n✅ Todas las fotos de 'caras_detectadas/' fueron eliminadas.")
+print("\n✅ Todas las fotos y carpetas de 'caras_detectadas/' fueron eliminadas.")

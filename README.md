@@ -13,8 +13,9 @@ v1
 └──┬── caras_detectadas/           # Output: recognition by known names
    ├── people_photos/              # Folders to be procesed (pre labeled encoding)
    ├── Test/                       # Photos to match with known people (people_photos/) (input)
-   ├── Agrupar_por_cara.py         # Script (see next section)
+   ├── Agrupar_por_perfil.py       # Script (see next section)
    ├── Borrar caras detectadas.py  # Script (see next section)
+   ├── crear_known_faces.py        # Script (see next section)
    └── known_faces.pkl             # Encodings of known people (people_photos/) (ignore)
 v2
 └──┬── Fotos/                      # Individual or group photos to be processed (input)
@@ -28,14 +29,14 @@ v2
 ## Scripts
 
 ### 1. Group by known people
-**File:** `Agrupar_por_carpeta.py`
+**File:** `Agrupar_por_perfil.py`
 
 - Uses `known_faces.pkl` for labeled encodings
 - Compares photos in `Test/`
 - If someone is recognized, saves full photo in `caras_detectadas/Name/`
 
 ```bash
-  Agrupar_por_carpeta.py
+  Agrupar_por_perfil.py
 ```
 ---
 
@@ -43,7 +44,7 @@ v2
 ###  2. Clear detected face results (known people)
 **File:** `Borrar caras detectadas.py`
 
-- Deletes all images in `caras_detectadas/`, but keeps the name folders
+- Deletes all images and folders in `caras_detectadas/`
 
 ```bash
   Borrar\ caras\ detectadas.py
@@ -52,7 +53,22 @@ v2
 
 ---
 
-###  3. Group by face (no names needed)
+### 3. Create known_faces.pkl
+**File:** `crear_known_faces.py`
+
+- Reads labeled face folders from `people_photos/`
+
+- Extracts all encodings from all images
+
+- Saves `known_faces.pkl` to be used for recognition in `Agrupar_por_carpeta.py`
+
+```bash
+  crear_known_faces.py
+```
+
+---
+
+###  4. Group by face (no names needed)
 **File:** `Agrupar_por_cara.py`
 
 - Detects and compares faces in `Fotos/`
@@ -65,7 +81,7 @@ v2
 ---
 
 
-### 4. Clear grouped folders and thumbnails
+### 5. Clear grouped folders and thumbnails
 **File:** `Limpiar_personas_agrupadas.py`
 
 - Deletes all folders and photos inside `personas_agrupadas/` and `miniaturas_marcadas/`
@@ -96,14 +112,19 @@ TOLERANCE = 0.6
 ##  How to Test
 
 
-### Recognize known people
+### Recognize known people (v1)
 
-1. Place images to train the model in `people_photos/` 
-2. Place test images in `Test/`
-3. Run:
+1. Create a folder for each person and add those photos to train the model in `people_photos/` 
+2. Run: 
+```bash
+   crear_known_faces.py
+```
+
+3. Place test images in `Test/`
+4. Run:
 
 ```bash
-   Agrupar_por_carpeta.py
+   Agrupar_por_perfil.py
 ```
 
 4. Results saved in `caras_detectadas/Name/`
@@ -125,7 +146,7 @@ TOLERANCE = 0.6
 ## Requirements
 
 ```bash
-pip install face_recognition opencv-python
+  pip install face_recognition opencv-python
 ```
 
 > On Windows, you may need:
@@ -136,7 +157,20 @@ pip install face_recognition opencv-python
 
 ## Extra Tips
 
-- Use clear images with visible faces.
+- Recommended photo set per person (helps a lot):
+
+| #  | Type of Photo                            | Description                                    | Required |
+|----| ---------------------------------------- | ---------------------------------------------- | -------- |
+| 1  | Frontal – Neutral expression             | Standard face, no emotion                      | ✅ Yes    |
+| 2  | Frontal – Smiling                        | Expression affects muscles around mouth/eyes   | ✅ Yes    |
+| 3  | Slight angle – Left                      | Simulates group photo angles                   | ✅ Yes    |
+| 4  | Slight angle – Right                     | Covers face profile symmetry                   | ✅ Yes    |
+| 5  | With glasses (if applicable)             | Makes it robust to glasses/no glasses          | ✅ Yes\*  |
+| 6  | Without glasses (if applicable)          | Essential if the person sometimes removes them | ✅ Yes\*  |
+| 7  | Tied hair / loose hair (if applicable)   | Face shape can vary with hair position         | Optional |
+| 8  | Strong facial expression (laughing, etc) | To capture variation in emotion                | Optional |
+
+
 - You can improve detection by changing:
 
 ```python
